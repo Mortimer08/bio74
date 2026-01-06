@@ -1,0 +1,17 @@
+*.ipr
+*.py
+*.pyc
+*.iml
+**/*.log
+data
+tmp
+out
+modules
+documentation
+logs
+.idea
+server.pid
+test-result
+conf/certificate.jks
+conf/api.conf
+conf/secret*
