@@ -15,3 +15,4 @@ test-result
 conf/certificate.jks
 conf/api.conf
 conf/secret*
+/conf/dev.conf
