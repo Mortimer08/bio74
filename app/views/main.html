@@ -1,17 +1,72 @@
 <!DOCTYPE html>
 
-<html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-    </head>
-    <body>
-        #{doLayout /}
-        
-        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-        #{get 'moreScripts' /}
-    </body>
+<html lang="ru">
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#{get 'description' /}">
+    <link rel="canonical" href="${request.secure ? 'https' : 'http'}://${request.host}${request.url}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    #{get 'moreStyles' /}
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+</head>
+<body>
+<header class="site-header">
+    <div class="container">
+        <div class="logo">
+            <a href="@{Application.index()}">
+                <img src="@{'/public/images/logo.png'}" alt="Биомир Челябинск">
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="*{@{Rent.index()}}*">Аренда</a></li>
+                <li><a href="*{@{Catalog.categories()}}*">Каталог</a></li>
+                <li><a href="*{@{Service.index()}}*">Обслуживание</a></li>
+                <li><a href="*{@{Application.about()}}*">О компании</a></li>
+                <li><a href="*{@{Application.contacts()}}*">Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="header-contacts">
+            <a href="tel:+73510000000" class="phone">+7 (351) 230-32-23</a>
+            <button class="btn btn-outline btn-sm" onclick="openModal()">Заказать звонок</button>
+        </div>
+    </div>
+
+</header>
+<main class="site-content">
+    #{doLayout /}
+</main>
+
+
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-info">
+            <p>&copy; ${new Date().format('yyyy')} ООО «Биомир»</p>
+            <p>Челябинск, Свердловский пр-т, 10</p>
+        </div>
+        <div class="footer-links">
+            <a href="/policy">Политика конфиденциальности</a>
+        </div>
+    </div>
+</footer>
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript"
+        charset="${_response_encoding}"></script>
+#{get 'moreScripts' /}
+*{#{if !consentGiven}
+<div id="cookie-banner" class="cookie-banner">
+    <div class="container">
+        <p>Мы используем куки для улучшения работы сайта. Продолжая навигацию, вы соглашаетесь с нашей
+            <a href="/policy">политикой конфиденциальности</a>.</p>
+        <button id="accept-cookies" class="btn-sm">Принять</button>
+    </div>
+</div>
+#{/if}}*
+</body>
+
 </html>
